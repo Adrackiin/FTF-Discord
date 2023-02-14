@@ -1,4 +1,5 @@
 import {SlashCommandBuilder} from 'discord.js';
+import ChallengeManager from "../challenge-manager";
 
 const data = new SlashCommandBuilder()
     .setName("flag")
@@ -9,13 +10,28 @@ const data = new SlashCommandBuilder()
         .setRequired(true))
 
 async function execute(interaction) {
-    if (interaction.inGuild()) {
-        await interaction.deferReply();
-        await interaction.deleteReply();
-        await interaction.user.send("Les flags doivent être renseignés ici.")
-        return;
+    const user = interaction.user;
+    const database = ChallengeManager.getInstance();
+    const flag = interaction.options.getString('flag');
+    let reply;
+
+    await interaction.deferReply();
+    await interaction.deleteReply();
+
+    const challenge = await database.getChallengeFromFlag(flag);
+    if (challenge == null) {
+        reply = ("Ce flag ne correspond à rien :pensive:");
+    } else {
+        const achieved = await database.getAchievedChallenges(user.id);
+        if(achieved.includes(challenge)){
+            reply = "Vous avez déjà résolu ce défi... Bien essayé :sunglasses:"
+        } else {
+            reply = `Vous avez réussi le défi ${database.getChallengeTitle(challenge)} :blush: !`;
+        }
     }
-    await interaction.reply("test");
+    user.send("Flag \\*\\*\\*\\*\\* envoyé, vérification... :gear:")
+    user.send(`${reply}\n​`);
+    await database.addLog(interaction.user.id, challenge ?? "00", flag);
 }
 
 module.exports = {
