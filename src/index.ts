@@ -2,6 +2,7 @@ import fs from 'node:fs';
 import path from 'node:path';
 // Require the necessary discord.js classes
 import {Client, Collection, GatewayIntentBits} from 'discord.js';
+import Database from "./database";
 
 const dotEnv = require("dotenv");
 dotEnv.config()
@@ -39,3 +40,9 @@ for (const file of fs.readdirSync(eventsPath).filter(file => file.endsWith('.js'
 
 // Log in to Discord with your client's token
 client.login(process.env.DISCORD_TOKEN);
+
+(async () => {
+    console.log(await Database.getInstance().isFlagPresent("test"));
+    console.log(await Database.getInstance().isFlagPresent("flat1"));
+    console.log(await Database.getInstance().isFlagPresent("flag"));
+})();
