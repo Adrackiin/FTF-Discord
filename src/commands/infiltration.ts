@@ -10,7 +10,6 @@ const data = new SlashCommandBuilder()
             .setRequired(true))
 
 async function execute(interaction) {
-    await interaction.deferReply();
     await interaction.deleteReply();
     const user = interaction.user;
 

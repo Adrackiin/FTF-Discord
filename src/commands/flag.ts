@@ -10,7 +10,6 @@ const data = new SlashCommandBuilder()
         .setRequired(true))
 
 async function execute(interaction) {
-    await interaction.deferReply();
     await interaction.deleteReply();
     const user = interaction.user;
 
@@ -40,6 +39,7 @@ async function execute(interaction) {
             const left = database.getChallengeLeft(achieved, difficultyId) - 1;
             const difficulty = database.getChallengeTitle(challenge);
             reply = `Vous avez réussi le défi ${difficulty} :blush:`;
+            await database.setFlagFound(flag, challenge);
             if (left == 0) {
                 reply += `\nVous avez fini la catégorie ${database.getDifficulty(difficultyId)} :partying_face: :partying_face: et avez gagné un arbre :palm_tree: !`;
                 await database.userAchievesDifficulty(user.id, difficultyId)

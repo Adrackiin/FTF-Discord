@@ -6,10 +6,8 @@ const data = new SlashCommandBuilder()
     .setDescription("Afficher vos statistiques");
 
 async function execute(interaction) {
-    await interaction.deferReply();
     await interaction.deleteReply();
     const user = interaction.user;
-
     const database = ChallengeManager.getInstance();
     const achieved: string[] = await database.getAchievedChallenges(user.id);
     const challengesLeft = database.getChallengesLeft(achieved);

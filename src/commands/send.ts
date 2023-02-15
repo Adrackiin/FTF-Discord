@@ -9,7 +9,6 @@ const data = new SlashCommandBuilder()
             .setRequired(true));
 
 async function execute(interaction) {
-    await interaction.deferReply();
     await interaction.deleteReply();
     if(interaction.user.id !== 178132411299790848){
         return;

@@ -62,7 +62,6 @@ class ChallengeManager {
     }
 
     public getChallengeTitle(challengeId: string) {
-        console.log(challengeId, this.categories)
         return `${this.getDifficulty(Number(challengeId[0]))} n°${challengeId[1]}`;
     }
 
@@ -102,6 +101,15 @@ class ChallengeManager {
             console.error(`Got more than one challenge for flag ${flag}: ${challenges}`);
             return null;
         }
+    }
+
+    public async setFlagFound(flag: string, challengeId: string) {
+        const table = `preuve${challengeId}`;
+        if(!this.proofTables.includes(table)){
+            console.error(`Table ${table} not found`);
+            return;
+        }
+        await this.execute(`UPDATE ${table} SET found = found + 1 WHERE flag = ?`, [flag])
     }
 
     public async getAchievedChallenges(discordUserId: number): Promise<string[]> {
