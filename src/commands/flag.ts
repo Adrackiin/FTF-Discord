@@ -24,6 +24,10 @@ async function execute(interaction) {
     }
 
     let reply;
+    if(flag === "drapeau"){
+        user.send(`:flag_fr:`);
+        return;
+    }
     const challenge = await database.getChallengeFromFlag(flag);
     if (challenge == null) {
         reply = ("Ce flag ne correspond à rien :pensive:");

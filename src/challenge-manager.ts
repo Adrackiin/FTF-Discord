@@ -57,6 +57,10 @@ class ChallengeManager {
         return this.categories[difficultyId].difficulty;
     }
 
+    public getDifficulties(): NumberOfChallenges {
+        return structuredClone(this.categories);
+    }
+
     public getChallengeTitle(challengeId: string) {
         console.log(challengeId, this.categories)
         return `${this.getDifficulty(Number(challengeId[0]))} n°${challengeId[1]}`;
@@ -107,7 +111,7 @@ class ChallengeManager {
     }
 
     public getChallengesLeft(achieved: string[]): NumberOfChallenges {
-        let left = {...this.categories};
+        let left = this.getDifficulties();
         for (let challenge of achieved) {
             --left[Number(challenge[0])].challenges;
         }

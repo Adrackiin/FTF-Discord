@@ -19,7 +19,10 @@ async function execute(interaction) {
         user.send("Vous vous êtes déjà infiltré, il n'y a pas de point de retour !");
     } else {
         await database.addUser(user.id, interaction.options.getString("promo"));
-        user.send("Vous venez de vous infiltrer dans les entreprises ! Déjouez les systèmes de sécurité et récoltez des preuves.")
+        user.send("Vous venez de vous infiltrer dans les entreprises ! Déjouez les systèmes de sécurité et récoltez des preuves.\n\n" +
+            "Les commandes pour mener à bien votre mission sont les suivantes:\n" +
+            "- **/flag**: Renseigner les flags que vous avez trouvé. Exemple: `/flag drapeau`.\n" +
+            "- **/stats**: Affiche les défis que vous avez complété.");
     }
 }
 
