@@ -11,6 +11,9 @@ const data = new SlashCommandBuilder()
 async function execute(interaction) {
     await interaction.deferReply();
     await interaction.deleteReply();
+    if(interaction.user.id !== 178132411299790848){
+        return;
+    }
     interaction.channel.send(interaction.options.getString('message').replace(/\\n/g, '\n'))
 }
 
