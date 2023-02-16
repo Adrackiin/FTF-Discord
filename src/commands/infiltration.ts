@@ -1,5 +1,6 @@
 import {SlashCommandBuilder} from 'discord.js';
 import ChallengeManager from "../challenge-manager";
+import {helpMessage} from "./help"
 
 const data = new SlashCommandBuilder()
     .setName("infiltration")
@@ -14,14 +15,18 @@ async function execute(interaction) {
     const user = interaction.user;
 
     const database = ChallengeManager.getInstance();
-    if(await database.userExists(user.id)){
+    if (await database.userExists(user.id)) {
         user.send("Vous vous êtes déjà infiltré, il n'y a pas de point de retour !");
     } else {
         await database.addUser(user.id, interaction.options.getString("promo"));
         user.send("Vous venez de vous infiltrer dans les entreprises ! Déjouez les systèmes de sécurité et récoltez des preuves.\n\n" +
-            "Les commandes pour mener à bien votre mission sont les suivantes:\n" +
-            "- **/flag**: Renseigner les flags que vous avez trouvé. Exemple: `/flag drapeau`.\n" +
-            "- **/stats**: Affiche les défis que vous avez complété.");
+        helpMessage);
+        const guild = await interaction.client.guilds.fetch(process.env.GUILD_ID);
+        const role = await guild.roles.cache.get("1075720486065016844");
+        const member = await guild.members.fetch(user.id);
+        if (role) {
+            await member.roles.add(role);
+        }
     }
 }
 

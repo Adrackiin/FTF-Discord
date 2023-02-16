@@ -1,4 +1,4 @@
-import {SlashCommandBuilder} from 'discord.js';
+import {SlashCommandBuilder, PermissionFlagsBits } from 'discord.js';
 
 const data = new SlashCommandBuilder()
     .setName("send")
@@ -6,13 +6,11 @@ const data = new SlashCommandBuilder()
     .addStringOption(option =>
         option.setName("message")
             .setDescription("Message à envoyer")
-            .setRequired(true));
+            .setRequired(true))
+    .setDefaultMemberPermissions(PermissionFlagsBits.Administrator);
 
 async function execute(interaction) {
     await interaction.deleteReply();
-    if(interaction.user.id !== 178132411299790848){
-        return;
-    }
     interaction.channel.send(interaction.options.getString('message').replace(/\\n/g, '\n'))
 }
 

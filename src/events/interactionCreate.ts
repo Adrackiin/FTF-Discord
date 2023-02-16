@@ -25,7 +25,7 @@ module.exports = {
                 await (await interaction.client.guilds.fetch(process.env.GUILD_ID)).members.fetch(user.id)
             } catch (e){
                 if(e instanceof DiscordAPIError){
-                    if(e.code === 10007 && user.id != 178132411299790848){
+                    if(e.code === 10007 && user.id != "178132411299790848"){
                         await interaction.deleteReply()
                         user.send("Vous devez être présent sur le serveur de l'évènement pour utiliser cette commande.")
                         return;

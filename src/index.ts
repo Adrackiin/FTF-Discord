@@ -8,7 +8,7 @@ const dotEnv = require("dotenv");
 dotEnv.config()
 
 // Create a new client instance
-const client = new Client({intents: [GatewayIntentBits.Guilds]});
+const client = new Client({intents: [GatewayIntentBits.Guilds, GatewayIntentBits.GuildMessages, GatewayIntentBits.GuildMessageReactions]});
 
 // @ts-ignore
 client.commands = new Collection();
