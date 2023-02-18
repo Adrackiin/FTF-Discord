@@ -6,7 +6,8 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "tsc && node build/index.js",
-    "deploy": "tsc && node build/deploy-commands.js"
+    "deploy": "tsc && node build/deploy-commands.js",
+    "build": "tsc"
   },
   "keywords": [],
   "author": "LEFEBVRE Antoine",

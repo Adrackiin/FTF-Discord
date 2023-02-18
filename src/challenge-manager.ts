@@ -27,9 +27,9 @@ class ChallengeManager {
             throw new Error("Database is already instantiated")
         }
         this.pool = mysql.createPool({
-            host: "127.0.0.1",
-            user: "discord",
-            password: process.env.LOCAL_MYSQL_DISCORD_PASSWORD,
+            host: process.env.FTF_DISCORD_DB_HOST,
+            user: process.env.FTF_DISCORD_DB_USERNAME,
+            password: process.env.FTF_DISCORD_DB_PASSWORD,
             database: "ftf",
         });
         (async () => {
