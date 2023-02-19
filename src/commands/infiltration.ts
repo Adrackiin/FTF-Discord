@@ -19,8 +19,8 @@ async function execute(interaction) {
         user.send("Vous vous êtes déjà infiltré, il n'y a pas de point de retour !");
     } else {
         await database.addUser(user.id, interaction.options.getString("promo"));
-        user.send("Vous venez de vous infiltrer dans les entreprises ! Déjouez les systèmes de sécurité et récoltez des preuves.\n\n" +
-        helpMessage);
+        user.send("Vous venez de commencer votre infiltration ! Déjouez les systèmes de sécurité et récoltez des preuves.\n\n" +
+        helpMessage + "\n\nNos agents ont récupérés cette adresse, allez voir ce qu'il s'y passe: https://ftf.earth/");
         const guild = await interaction.client.guilds.fetch(process.env.GUILD_ID);
         const role = await guild.roles.cache.get("1075720486065016844");
         const member = await guild.members.fetch(user.id);
