@@ -5,7 +5,11 @@ module.exports = {
     once: true,
     async execute(client) {
         console.log(`Ready! Logged in as ${client.user.tag}`);
-        const channel = await client.channels.fetch("1066657027042054226");
-        const msg = await channel.messages.fetch("1076852175193526272");
+        try {
+            const channel = await client.channels.fetch("1066657027042054226");
+            const msg = await channel.messages.fetch("1076852175193526272");
+        } catch(e){
+            console.error(e);
+        }
     },
 };
