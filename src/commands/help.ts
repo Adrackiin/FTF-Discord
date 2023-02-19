@@ -3,7 +3,7 @@ import {SlashCommandBuilder, PermissionFlagsBits } from 'discord.js';
 export const helpMessage = "Les commandes pour mener à bien votre mission sont les suivantes:\n" +
     "- **/flag**: Renseigner les flags que vous avez trouvé. Exemple: `/flag drapeau`.\n" +
     "- **/help**: Affiche ce texte.\n" +
-    "- **/inscription**: S'inscrire à l'évènement.\n" +
+    "- **/infiltration**: S'inscrire à l'évènement.\n" +
     "- **/stats**: Affiche les défis que vous avez complété."
 
 const data = new SlashCommandBuilder()
@@ -16,6 +16,7 @@ async function execute(interaction) {
 }
 
 module.exports = {
+    helpMessage,
     data,
     execute
 }

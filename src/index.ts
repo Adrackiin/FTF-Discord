@@ -39,4 +39,4 @@ for (const file of fs.readdirSync(eventsPath).filter(file => file.endsWith('.js'
 }
 
 // Log in to Discord with your client's token
-client.login(process.env.DISCORD_TOKEN).then();
+client.login(process.env.DISCORD_TOKEN).then().catch(error => console.error(error));

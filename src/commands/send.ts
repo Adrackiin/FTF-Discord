@@ -11,7 +11,7 @@ const data = new SlashCommandBuilder()
 
 async function execute(interaction) {
     await interaction.deleteReply();
-    interaction.channel.send(interaction.options.getString('message').replace(/\\n/g, '\n'))
+    await interaction.channel.send(interaction.options.getString('message').replace(/\\n/g, '\n'))
 }
 
 module.exports = {
