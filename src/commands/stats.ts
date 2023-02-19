@@ -10,13 +10,12 @@ async function execute(interaction) {
     const user = interaction.user;
     const database = ChallengeManager.getInstance();
     const achieved: string[] = await database.getAchievedChallenges(user.id);
-    const challengesLeft = database.getChallengesLeft(achieved);
     const numberOfChallenges = database.getDifficulties();
     user.send("**Défis réalisés:**\n" + Object.entries(database.getDifficulties()).map(([key, value]) => {
-        const difficultyId  = Number(key);
-        const challengeLeft = challengesLeft[difficultyId].challenges;
-        return `${value.difficulty.replace(/^\w/, c => c.toUpperCase())}\n` +
-            `${":green_square:".repeat(numberOfChallenges[difficultyId].challenges - challengeLeft)}${":red_square:".repeat(challengeLeft)}\n`;
+        const difficultyId = Number(key);
+        return `${value.difficulty.replace(/^\w/, c => c.toUpperCase())}\n${
+            Array.from({length: numberOfChallenges[difficultyId].challenges}, (_, i) => i + 1)
+            .map(id => achieved.includes(`${difficultyId}${id}`) ? ":green_square:" : ":red_square:").join("")}\n`
     }).join("\n"));
 }
 
