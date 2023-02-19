@@ -3,7 +3,7 @@ import {DiscordAPIError, Events} from 'discord.js';
 import ChallengeManager from "../challenge-manager";
 import Releaser = SemaphoreInterface.Releaser;
 
-let needRegister = ["flag"]
+let needRegister = ["flag", "stats"]
 let needLock = ["flag"]
 const mutex = new Mutex()
 
