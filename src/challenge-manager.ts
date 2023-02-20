@@ -81,7 +81,7 @@ class ChallengeManager {
             return;
         }
         await this.execute(
-            `UPDATE users SET difficulty${difficultyId} = 1 WHERE id_discord = ?`
+            `UPDATE users SET difficulty${difficultyId} = 1 WHERE id_discord = ?`,
                 [id]);
     }
 
