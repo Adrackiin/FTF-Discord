@@ -42,9 +42,12 @@ module.exports = {
             if(needLock.includes(interaction.commandName)){
                 release = await mutex.acquire();
             }
-            await command.execute(interaction);
-            if(release != null) {
-                release();
+            try {
+                await command.execute(interaction);
+            } finally {
+                if(release != null) {
+                    release();
+                }
             }
         } catch (error) {
             console.error(`Error executing ${interaction.commandName}`);
